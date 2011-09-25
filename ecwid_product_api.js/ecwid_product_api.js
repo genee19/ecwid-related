@@ -2,7 +2,7 @@
   window.Ecwid = window.Ecwid || {};
   if (!('ProductAPI' in window.Ecwid)) {
     window.Ecwid.ProductAPI = (function() {
-      var doJSONPrequest, papi_base_url;
+      var doJSONPrequest;
       doJSONPrequest = function(url, callback) {
         var callbackname;
         if ('jQuery' in window && 'getJSON' in window.jQuery) {
@@ -33,7 +33,7 @@
           })();
         }
       };
-      papi_base_url = function() {
+      ProductAPI.prototype.base_url = function() {
         return "http://app.ecwid.com/api/v1/" + this.store_id;
       };
       function ProductAPI(store_id) {
@@ -47,28 +47,28 @@
         if (parent == null) {
           parent = 0;
         }
-        return doJSONPrequest("" + (papi_base_url()) + "/categories?parent=" + parent, callback);
+        return doJSONPrequest("" + (this.base_url()) + "/categories?parent=" + parent, callback);
       };
       ProductAPI.prototype.products = function(category, callback) {
         if (category == null) {
           category = 0;
         }
-        return doJSONPrequest("" + (papi_base_url()) + "/products?category=" + category, callback);
+        return doJSONPrequest("" + (this.base_url()) + "/products?category=" + category, callback);
       };
       ProductAPI.prototype.product = function(id, callback) {
         if (id == null) {
           id = 0;
         }
-        return doJSONPrequest("" + (papi_base_url()) + "/product?id=" + id, callback);
+        return doJSONPrequest("" + (this.base_url()) + "/product?id=" + id, callback);
       };
       ProductAPI.prototype.profile = function(callback) {
-        return doJSONPrequest("" + (papi_base_url()) + "/profile", callback);
+        return doJSONPrequest("" + (this.base_url()) + "/profile", callback);
       };
       ProductAPI.prototype.random_products = function(count, callback) {
         if (count == null) {
           count = 1;
         }
-        return doJSONPrequest("" + (papi_base_url()) + "/random_products?count=" + count, callback);
+        return doJSONPrequest("" + (this.base_url()) + "/random_products?count=" + count, callback);
       };
       return ProductAPI;
     })();

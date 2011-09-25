@@ -25,7 +25,7 @@ unless 'ProductAPI' of window.Ecwid then class window.Ecwid.ProductAPI
         jsonp_carrier.src = "#{url}&callback=window.Ecwid.ProductAPI.#{callbackname}"
         window.document.body.appendChild jsonp_carrier
 
-  papi_base_url = ()->
+  base_url: ()->
     "http://app.ecwid.com/api/v1/#{@store_id}"
   
   constructor: (store_id) ->
@@ -35,16 +35,16 @@ unless 'ProductAPI' of window.Ecwid then class window.Ecwid.ProductAPI
   	  @store_id = store_id
 
   categories: (parent = 0, callback)->
-    doJSONPrequest("#{papi_base_url()}/categories?parent=#{parent}", callback)
+    doJSONPrequest("#{@base_url()}/categories?parent=#{parent}", callback)
 
   products: (category=0, callback)->
-    doJSONPrequest("#{papi_base_url()}/products?category=#{category}", callback)
+    doJSONPrequest("#{@base_url()}/products?category=#{category}", callback)
 
   product: (id=0, callback)->
-    doJSONPrequest("#{papi_base_url()}/product?id=#{id}", callback)
+    doJSONPrequest("#{@base_url()}/product?id=#{id}", callback)
 
   profile: (callback)->
-    doJSONPrequest("#{papi_base_url()}/profile", callback)
+    doJSONPrequest("#{@base_url()}/profile", callback)
 
   random_products: (count=1, callback)->
-    doJSONPrequest("#{papi_base_url()}/random_products?count=#{count}", callback)
+    doJSONPrequest("#{@base_url()}/random_products?count=#{count}", callback)
