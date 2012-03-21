@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>Ligthbox in Ecwid</title>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script type="text/javascript" src="./fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+	<link rel="stylesheet" type="text/css" href="./fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+</head>
+<body>
+	<script type="text/javascript" src="//app.ecwid.com/script.js?226217"></script>
+	<script type="text/javascript"> xProductBrowser("categoriesPerRow=3","views=grid(3,3) list(10) table(20)","categoryView=grid","searchView=list","style="); </script>
+	<script type="text/javascript">
+	Ecwid.OnPageLoaded.add(function(page) {
+	  if (page.type === 'PRODUCT') {
+	    $('div.ecwid-productBrowser-details-descr a.fancy[href]').fancybox();
+	  }
+	});
+
+	// opening a demo product by default
+	if (window.location.hash !== '#ecwid:category=0&mode=product&product=2559176') {
+	  window.location.hash = '#ecwid:category=0&mode=product&product=2559176';
+	}
+	</script>
+</body>
+</html>
